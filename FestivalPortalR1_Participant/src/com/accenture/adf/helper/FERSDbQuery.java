@@ -28,6 +28,19 @@ public class FERSDbQuery {
 
 	public String getSearchEvent() {
 		System.out.println("Changes from git");
+				System.out.println("Changes from git");
+				System.out.println("Changes from git");
+				System.out.println("Changes from git");
+				System.out.println("Changes from git");
+
+				System.out.println("Changes from git");
+		System.out.println("Changes from git");
+
+				System.out.println("Changes from git");
+
+		
+		
+		
 		return searchEvent;
 	}
 
