@@ -27,7 +27,7 @@ public class FERSDbQuery {
 	private String validateVisitor = "";
 
 	public String getSearchEvent() {
-		
+		System.out.println("Changes from git");
 		return searchEvent;
 	}
 
