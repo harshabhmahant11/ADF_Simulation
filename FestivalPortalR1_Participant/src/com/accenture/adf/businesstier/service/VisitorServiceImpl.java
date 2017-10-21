@@ -22,6 +22,7 @@ import com.accenture.adf.businesstier.entity.Visitor;
 public class VisitorServiceImpl implements VisitorFacade {
 
 	VisitorDAO vdao = new VisitorDAO(); ///new line added
+	EventDAO edao = new EventDAO();
 	
 	//LOGGER for logging all exceptions of VISITOR DAO
 	private static Logger log = Logger.getLogger(VisitorServiceImpl.class);
@@ -142,6 +143,22 @@ public class VisitorServiceImpl implements VisitorFacade {
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document
 					
+		try {
+			vdao.registerVisitorToEvent(visitor, eventid);
+			edao.updateEventNominations(eventid);
+						
+		} catch (ClassNotFoundException e) {
+			log.equals(e.getMessage());
+
+		} catch (SQLException e) {
+			log.equals(e.getMessage());
+
+		} catch (Exception e) {
+			log.equals(e.getMessage());
+
+		}
+		
+		
 	}
 
 	/**

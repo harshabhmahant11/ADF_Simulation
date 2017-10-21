@@ -122,9 +122,10 @@ public class TestEventDAO {
 	 * Positive test case for method updateEventNominations
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
+	 * @throws FERSGenericException 
 	 */
 	@Test
-	public void testUpdateEventNominations_Positive() throws ClassNotFoundException, SQLException {
+	public void testUpdateEventNominations_Positive() throws ClassNotFoundException, SQLException, FERSGenericException {
 		/**
 		 * @TODO: Find out seats available for an event by opening a connection
 		 * and calling the query SELECT SEATSAVAILABLE FROM EVENT WHERE EVENTID = ?
