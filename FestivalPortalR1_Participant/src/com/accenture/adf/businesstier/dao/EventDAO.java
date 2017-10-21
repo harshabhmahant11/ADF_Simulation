@@ -84,7 +84,8 @@ public class EventDAO {
 		e.setDuration(resultSet.getString("duration"));
 		e.setSeatsavailable(resultSet.getShort("seatsavailable"));
 		e.setEventtype(resultSet.getString("eventtype"));
-		eventList.add(e);				
+		eventList.add(e);		
+		
 	}
 
 // TODO:  Add code here.....
@@ -109,13 +110,14 @@ return eventList;
 	 *  message stating the event record was not updated.
 	 * 
 	 * @param eventid (type int)
+	 * @throws FERSGenericException 
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 *	  
 	 */
 	
-	public void updateEventNominations(int eventid) //EXCEPTION PART NOT DONE
+	public void updateEventNominations(int eventid) throws FERSGenericException 
 	{	
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
@@ -124,14 +126,22 @@ return eventList;
 			connection = FERSDataConnection.createConnection();
 			statement=connection.prepareStatement(query.getUpdateEvent());
 			statement.setInt(1, eventid);
-			statement.executeUpdate();	
+			
+			int status = statement.executeUpdate();
+			if (status <= 0)
+				throw new FERSGenericException("Records not updated properly",
+						new Exception());
+			
+			
+			
 		} catch (ClassNotFoundException e) {
 	
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//throw new FERSGenericException("hello", e);
-			e.printStackTrace();
+			log.error(e.getMessage());
+			throw new FERSGenericException(e.getMessage(), new Exception());
 		}
 	}
 
