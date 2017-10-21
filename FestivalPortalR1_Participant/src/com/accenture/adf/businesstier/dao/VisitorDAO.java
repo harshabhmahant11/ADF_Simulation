@@ -68,51 +68,51 @@ public class VisitorDAO {
 	 *	@throws Exception
 	 *	  
 	 */
-	
+	/*METHOD DONE*/
 	public boolean insertData(Visitor visitor) throws ClassNotFoundException,
 	SQLException, Exception {
 
-connection = FERSDataConnection.createConnection();
-String iQry = query.getInsertQuery();
+		connection = FERSDataConnection.createConnection();
+		String iQry = query.getInsertQuery();
 
-statement =connection.prepareStatement(query.getValidateVisitor());
-resultSet = statement.executeQuery();
+		statement =connection.prepareStatement(query.getValidateVisitor());
+		resultSet = statement.executeQuery();
 
-boolean useFound =false;
-while (resultSet.next())
-{
-	if(visitor.getUserName().equalsIgnoreCase(resultSet.getString("username")))
-	{
-		useFound=true;
-		break;
-	}
-}
-
-
-Boolean flag=false;
-if(!useFound)
-{
-statement = connection.prepareStatement(iQry);
-statement.setString(1, visitor.getUserName());		
-statement.setString(2,visitor.getPassword());
-statement.setString(3,visitor.getFirstName());
-statement.setString(4,visitor.getLastName());
-statement.setString(5,visitor.getEmail());
-statement.setString(6,visitor.getPhoneNumber());
-statement.setString(2, visitor.getAddress());
+		boolean useFound =false;
+		while (resultSet.next())
+		{
+			if(visitor.getUserName().equalsIgnoreCase(resultSet.getString("username")))
+			{
+				useFound=true;
+				break;
+			}
+		}
 
 
-int retVal=statement.executeUpdate();
-	if(retVal>0)
-		flag=true;
-}
-FERSDataConnection.closeConnection();
+		Boolean flag=false;
+		if(!useFound)
+		{
+			statement = connection.prepareStatement(iQry);
+			statement.setString(1, visitor.getUserName());		
+			statement.setString(2,visitor.getPassword());
+			statement.setString(3,visitor.getFirstName());
+			statement.setString(4,visitor.getLastName());
+			statement.setString(5,visitor.getEmail());
+			statement.setString(6,visitor.getPhoneNumber());
+			statement.setString(7, visitor.getAddress());
+
+
+			int retVal=statement.executeUpdate();
+			if(retVal>0)
+				flag=true;
+		}
+		FERSDataConnection.closeConnection();
 // TODO:  Add code here.....
 // TODO:  Pseudo-code are in the block comments above this method
 // TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document   
 
-return flag;
-}
+		return flag;
+	}
 
 
 	/**
@@ -138,6 +138,7 @@ return flag;
 	 * 
 	 * 
 	 */
+	/*DONE    */
 	public Visitor searchUser(String username, String password)
 			throws ClassNotFoundException, SQLException {
 		
@@ -194,10 +195,38 @@ return flag;
 	 *  @throws Exception
 	 *  
 	 */
-
+ /* DONE BUT NEED TO CHECK WITH SIR*/
 	public void registerVisitorToEvent(Visitor visitor, int eventid)
 			throws ClassNotFoundException, SQLException, Exception {
 
+		
+		connection = FERSDataConnection.createConnection();
+		String statusQuery = query.getStatusQuery();
+		statement = connection.prepareStatement(statusQuery);
+		statement.setInt(1, visitor.getVisitorId());
+		
+		resultSet = statement.executeQuery();
+		Boolean alreadyRegistered = false;
+		
+		while(resultSet.next())
+		{
+			if(eventid==(resultSet.getInt("eventid")))
+			{
+				alreadyRegistered = true;
+				break;
+			}
+		}
+		
+		
+		if(!alreadyRegistered)
+		{
+		String rqry = query.getRegisterQuery();
+		statement = connection.prepareStatement(rqry);
+		statement.setInt(1, eventid);
+		statement.setInt(2, visitor.getVisitorId());
+		
+		statement.executeUpdate();
+		}
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document   

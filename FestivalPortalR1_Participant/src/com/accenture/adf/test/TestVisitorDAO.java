@@ -2,6 +2,9 @@ package com.accenture.adf.test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,6 +15,7 @@ import org.junit.Test;
 import com.accenture.adf.businesstier.dao.VisitorDAO;
 import com.accenture.adf.businesstier.entity.Event;
 import com.accenture.adf.businesstier.entity.Visitor;
+import com.accenture.adf.helper.FERSDataConnection;
 
 /**
  * JUnit test case for VisitorDAO class for testing all repository methods to
@@ -19,6 +23,12 @@ import com.accenture.adf.businesstier.entity.Visitor;
  * 
  */
 public class TestVisitorDAO {
+	
+	private static Connection connection = null;
+	private static PreparedStatement statement = null;
+	private static ResultSet resultSet = null;
+	
+	
 	
 	private Visitor visitor;
 	private VisitorDAO visitorDAO;
@@ -98,7 +108,7 @@ public class TestVisitorDAO {
 		
 		Visitor v1 = null;
 		try {
-			v1 = visitorDAO.searchUser("bsmit", "password");
+			v1 = visitorDAO.searchUser("bsmith", "password");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,7 +129,9 @@ public class TestVisitorDAO {
 
 	/**
 	 * Test case for method registerVisitorToEvent
-	 */
+	 */ 
+	/* DONE BUT NEED TO CHECK WITH SIR*/
+
 	@Test
 	public void testRegisterVisitorToEvent() {
 		/**
@@ -127,6 +139,41 @@ public class TestVisitorDAO {
 		 * Pass this visitor object and valid eventid to registerVisitorToEvent method
 		 * and assert the value
 		 */		
+		try {
+			visitor = visitorDAO.searchUser("bsmith", "password");
+			visitorDAO.registerVisitorToEvent(visitor, 1002);
+			
+			String qry = "SELECT COUNT(*) FROM EVENTSIGNUP WHERE EVENTID = ? AND VISITORID = ? ;";
+			
+			connection = FERSDataConnection.createConnection();
+			statement = connection.prepareStatement(qry);
+			statement.setInt(1, 1002);
+			statement.setInt(2, visitor.getVisitorId());
+			
+			resultSet = statement.executeQuery();
+			
+			 resultSet.next();
+			
+			 int count = resultSet.getInt(1);
+			 
+			 
+			 assertEquals(1, count);
+			 
+			 
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}	
 
 	/**
