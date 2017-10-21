@@ -188,7 +188,20 @@ public class VisitorServiceImpl implements VisitorFacade {
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document
 				
-		return null; // TODO Replace "null" with "ArrayList<Event>" collection, based on updates to code in the TODO section.
+		ArrayList<Event> registeredEventList = new ArrayList<Event>();
+		
+		try {
+			registeredEventList = vdao.registeredEvents(visitor);
+		} catch (ClassNotFoundException e) {
+			log.equals(e.getMessage());
+
+		} catch (SQLException e) {
+			log.equals(e.getMessage());
+
+		}
+		
+		
+		return registeredEventList; // TODO Replace "null" with "ArrayList<Event>" collection, based on updates to code in the TODO section.
 	}
 
 	/**

@@ -186,6 +186,26 @@ public class TestVisitorDAO {
 		 * Pass this visitor object and valid eventid to registeredEvents method
 		 * and assert the value
 		 */		
+		
+		try {
+			visitor = visitorDAO.searchUser("bsmith", "password");
+			
+			registeredEvents = visitorDAO.registeredEvents(visitor);
+			
+			assertEquals(3, registeredEvents.size());
+			
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	/**

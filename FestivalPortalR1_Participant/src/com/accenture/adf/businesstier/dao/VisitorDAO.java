@@ -195,7 +195,7 @@ public class VisitorDAO {
 	 *  @throws Exception
 	 *  
 	 */
- /* DONE BUT NEED TO CHECK WITH SIR*/
+ /* DONE BUT NEED TO CHECK WITH SIR about checking visitor status*/
 	public void registerVisitorToEvent(Visitor visitor, int eventid)
 			throws ClassNotFoundException, SQLException, Exception {
 
@@ -207,7 +207,7 @@ public class VisitorDAO {
 		
 		resultSet = statement.executeQuery();
 		Boolean alreadyRegistered = false;
-		
+		// checking whether the given event is already registered with the visitor or not
 		while(resultSet.next())
 		{
 			if(eventid==(resultSet.getInt("eventid")))
@@ -256,12 +256,39 @@ public class VisitorDAO {
 	public ArrayList<Event> registeredEvents(Visitor visitor)
 			throws ClassNotFoundException, SQLException {
 		
+		ArrayList<Event>  registeredEventList = new ArrayList<Event>();
+		Event e = new Event();
+		
+		
+		connection = FERSDataConnection.createConnection();
+		String statusQuery = query.getStatusQuery();
+		statement = connection.prepareStatement(statusQuery);
+		statement.setInt(1, visitor.getVisitorId());
+		
+		resultSet = statement.executeQuery();
+	//	SELECT E1.EVENTID, E1.NAME, E1.DESCRIPTION, E1.PLACES, E1.DURATION, E1.EVENTTYPE , E2.SIGNUPID FROM EVENT E1, EVENTSIGNUP E2 WHERE E1.EVENTID = E2.EVENTID AND E2.VISITORID = 1001;
+		while(resultSet.next())
+		{
+			e.setDescription(resultSet.getString("description"));
+			e.setName(resultSet.getString("name"));
+			e.setEventid(resultSet.getInt("eventid"));
+			e.setPlace(resultSet.getString("places"));
+			e.setDuration(resultSet.getString("duration"));
+			e.setEventtype(resultSet.getString("eventtype"));
+			e.setSignupid(resultSet.getInt("signupid"));
+			
+			
+			registeredEventList.add(e);
+		}
+		
+		
+		
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document   
 			
 		
-		return null; 
+		return registeredEventList; 
 	}
 
 	/**

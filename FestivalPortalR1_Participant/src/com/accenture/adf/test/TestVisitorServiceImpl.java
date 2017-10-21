@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import javax.validation.constraints.AssertTrue;
+
 import junit.framework.Assert;
 
 import org.junit.After;
@@ -95,6 +97,9 @@ public class TestVisitorServiceImpl {
 	/**
 	 * Test case for method RegisterVisitor
 	 */
+	
+	
+	/*Doubt*/
 	@Test
 	public void testRegisterVisitor() {
 		/**
@@ -102,6 +107,13 @@ public class TestVisitorServiceImpl {
 		 * can be retrieved using searchVisitor method and then asserting the returned
 		 * type of RegisterVisitor method 
 		 */		
+		visitor = visitorServiceImpl.searchVisitor("bsmith", "password");
+
+		
+		
+	//	assertEquals(null, visitorServiceImpl.RegisterVisitor(visitor, 1003));
+		
+		
 	}
 
 	/**
