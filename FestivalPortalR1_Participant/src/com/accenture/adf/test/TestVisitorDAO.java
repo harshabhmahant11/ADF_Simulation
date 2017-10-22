@@ -68,7 +68,7 @@ public class TestVisitorDAO {
 		 * Assert the values of username
 		 */		
 		
-		visitor.setUserName("Ttt");
+		visitor.setUserName("Tttit");
 		visitor.setFirstName("asA");
 		visitor.setFirstName("asda");
 		visitor.setPassword("xxxx");
@@ -219,6 +219,28 @@ public class TestVisitorDAO {
 		 * Pass this visitor object to updateVisitor method
 		 * and assert the value of changed value
 		 */		
+		
+		try {
+			visitor = visitorDAO.searchUser("bsmith", "password");
+			visitor.setPassword("password");
+			
+			
+			
+			int status = visitorDAO.updateVisitor(visitor);
+			
+			assertEquals(1, status);
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 	/**

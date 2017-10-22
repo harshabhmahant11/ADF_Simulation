@@ -253,6 +253,8 @@ public class VisitorDAO {
 	 *  @throws SQLException
 	 *  
 	 */
+	
+	/* DONE */
 	public ArrayList<Event> registeredEvents(Visitor visitor)
 			throws ClassNotFoundException, SQLException {
 		

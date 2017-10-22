@@ -2,6 +2,7 @@ package com.accenture.adf.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.AssertTrue;
@@ -69,7 +70,9 @@ public class TestVisitorServiceImpl {
 		visitor.setUserName("userName");
 		
 		
+		boolean status = visitorServiceImpl.createVisitor(visitor);
 		
+		assertEquals(false, status);
 		
 	}
 
@@ -85,7 +88,7 @@ public class TestVisitorServiceImpl {
 		visitor = visitorServiceImpl.searchVisitor("bsmith", "password");
 		
 		
-		Visitor v = new Visitor();
+		//Visitor v = new Visitor();
 		
 		
 		assertEquals("bsmith",visitor.getUserName() );
@@ -126,6 +129,14 @@ public class TestVisitorServiceImpl {
 		 * can be retrieved using searchVisitor method and then asserting the returned
 		 * type of showRegisteredEvents method 
 		 */		
+		ArrayList<Event> registeredEventList = new ArrayList<Event>();
+
+		visitor = visitorServiceImpl.searchVisitor("bsmith", "password");
+		
+		
+		registeredEventList = visitorServiceImpl.showRegisteredEvents(visitor);
+		
+		assertEquals(3, registeredEventList.size());
 	}
 
 	/**
@@ -138,6 +149,12 @@ public class TestVisitorServiceImpl {
 		 * can be retrieved using searchVisitor method and then asserting the returned
 		 * type of updateVisitorDetails
 		 */		
+		visitor = visitorServiceImpl.searchVisitor("bsmith", "password");
+
+		int status = visitorServiceImpl.updateVisitorDetails(visitor);
+		
+		assertEquals(1, status);
+		
 	}
 
 	/**
@@ -150,6 +167,8 @@ public class TestVisitorServiceImpl {
 		 * retrieved using searchVisitor method and then asserting the returned type 
 		 * of unregisterEvent
 		 */		
+		
+		
 	}
 
 }
