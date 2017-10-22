@@ -175,6 +175,16 @@ return eventList;
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document   
 
+		connection = FERSDataConnection.createConnection();
+		statement=connection.prepareStatement(query.getCheckEvent());
+		statement.setInt(1, eventid);
+		statement.setInt(2, visitor.getVisitorId());
+		
+		resultSet = statement.executeQuery();
+		resultSet.next();
+		
+		status = resultSet.getInt(1);
+		
 		if (status >= 1)
 			return true;
 		else

@@ -176,6 +176,31 @@ public class TestEventDAO {
 		 * valid eventId
 		 * Assert the value of return type 
 		 */		
+		Visitor visitor = new Visitor();
+		EventDAO eventDao = new EventDAO();
+		boolean status = false;
+		
+		
+		visitor.setVisitorId(1001);
+	
+		
+		
+		try {
+			status= eventDao.checkEventsofVisitor(visitor, 1001);
+			
+			assertEquals(true, status);
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 }

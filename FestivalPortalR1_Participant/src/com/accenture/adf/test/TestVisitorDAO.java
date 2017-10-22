@@ -140,10 +140,11 @@ public class TestVisitorDAO {
 		 * and assert the value
 		 */		
 		try {
-			visitor = visitorDAO.searchUser("bsmith", "password");
+			visitor = visitorDAO.searchUser("npatel", "password");
 			visitorDAO.registerVisitorToEvent(visitor, 1002);
 			
 			String qry = "SELECT COUNT(*) FROM EVENTSIGNUP WHERE EVENTID = ? AND VISITORID = ? ;";
+			
 			
 			connection = FERSDataConnection.createConnection();
 			statement = connection.prepareStatement(qry);

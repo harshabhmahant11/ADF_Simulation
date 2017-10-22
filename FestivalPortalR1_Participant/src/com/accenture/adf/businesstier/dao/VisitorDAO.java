@@ -200,22 +200,27 @@ public class VisitorDAO {
 			throws ClassNotFoundException, SQLException, Exception {
 
 		
+		
+		
+		int status;
+		Boolean alreadyRegistered = false;
 		connection = FERSDataConnection.createConnection();
-		String statusQuery = query.getStatusQuery();
-		statement = connection.prepareStatement(statusQuery);
-		statement.setInt(1, visitor.getVisitorId());
+		statement=connection.prepareStatement(query.getCheckEvent());
+		statement.setInt(1, eventid);
+		statement.setInt(2, visitor.getVisitorId());
 		
 		resultSet = statement.executeQuery();
-		Boolean alreadyRegistered = false;
-		// checking whether the given event is already registered with the visitor or not
-		while(resultSet.next())
-		{
-			if(eventid==(resultSet.getInt("eventid")))
-			{
-				alreadyRegistered = true;
-				break;
-			}
-		}
+		resultSet.next();
+		
+		status = resultSet.getInt(1);
+		
+		if (status >= 1)
+			alreadyRegistered = true;
+		else
+			alreadyRegistered = false;
+		
+		
+		
 		
 		
 		if(!alreadyRegistered)
