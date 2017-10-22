@@ -27,7 +27,18 @@ public class FERSDbQuery {
 	private String validateVisitor = "";
 
 	public String getSearchEvent() {
+			System.out.println("mars git check............." );
 			
+			System.out.println("mars git check............." );
+			System.out.println("mars git check............." );
+
+			
+			System.out.println("mars git check............." );
+
+			System.out.println("mars git check............." );
+
+			System.out.println("mars git check............." );
+
 		return searchEvent;
 	}
 
