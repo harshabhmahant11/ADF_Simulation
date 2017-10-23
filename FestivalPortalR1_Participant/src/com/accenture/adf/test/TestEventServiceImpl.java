@@ -42,6 +42,8 @@ public class TestEventServiceImpl {
 		/**
 		 * @TODO: Release all the objects here by assigning them null  
 		 */
+		visitor=null;
+		eventServiceImpl=null;
 	}
 
 	/**
@@ -52,6 +54,9 @@ public class TestEventServiceImpl {
 		/**
 		 * @TODO: Call getAllEvents method and assert it for the size of returned array
 		 */		
+		eventServiceImpl = new EventServiceImpl();
+		eventList=eventServiceImpl.getAllEvents();
+		assertEquals(3,eventList.size());
 	}
 
 	/**
@@ -62,7 +67,11 @@ public class TestEventServiceImpl {
 		/**
 		 * @TODO: Call checkEventsofVisitor and assert the returned type of this method
 		 * for appropriate return type
-		 */		
+		 */	
+			Visitor visitor = new Visitor();
+			visitor.setVisitorId(1002);
+			assertTrue(eventServiceImpl.checkEventsofVisitor(visitor,1002));
+		
 	}
 
 	/**

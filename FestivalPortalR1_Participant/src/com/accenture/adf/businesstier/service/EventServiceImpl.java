@@ -83,8 +83,21 @@ public class EventServiceImpl implements EventFacade {
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document
-				
-		return false; // replace "false" with the "status" variable used in the code in 'TODO' section
+		Boolean status=false;
+		eventdao=new EventDAO();
+		try {
+			status = eventdao.checkEventsofVisitor(visitor, eventid);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e.getMessage());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		return status; // replace "false" with the "status" variable used in the code in 'TODO' section
 	}
 
 	/**
@@ -106,7 +119,9 @@ public class EventServiceImpl implements EventFacade {
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document
-				
+		//eventdao = new EventDAO();
+		//eventdao.
+		
 	}
 
 }
