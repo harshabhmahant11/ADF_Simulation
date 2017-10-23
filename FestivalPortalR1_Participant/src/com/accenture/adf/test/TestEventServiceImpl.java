@@ -74,7 +74,7 @@ public class TestEventServiceImpl {
 		 */	
 			Visitor visitor = new Visitor();
 			visitor.setVisitorId(1002);
-			assertTrue(eventServiceImpl.checkEventsofVisitor(visitor,1002));
+			assertEquals(true,eventServiceImpl.checkEventsofVisitor(visitor,1002));
 		
 	}
 
