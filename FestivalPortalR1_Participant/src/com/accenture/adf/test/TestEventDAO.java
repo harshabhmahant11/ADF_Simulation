@@ -76,9 +76,9 @@ public class TestEventDAO {
 		/**
 		 * @TODO: Release all the objects here by assigning them null  
 		 */
-		//showAllEvents=null;
-		//dao=null;
-		//connection=null;
+		showAllEvents=null;
+		dao=null;
+		connection=null;
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class TestEventDAO {
 				resultSet = statement.executeQuery();
 				resultSet.next();
 				int val2 = resultSet.getInt(1);
-				System.out.println(val1+""+val2);
+				//System.out.println(val1+""+val2);
 				assertEquals(true,((++val1)==val2));
 				
 		} catch (ClassNotFoundException e) {
@@ -151,6 +151,17 @@ public class TestEventDAO {
 		 * @TODO: Call updateEventDeletions for incorrect eventid and it should
 		 * throw an exception
 		 */	
+		int flag=0;
+		try {
+			dao.updateEventDeletions(1009);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag=1;	
+		}
+		finally
+		{
+			assertEquals(1, flag);
+		}
 	}
 
 	/**
@@ -228,12 +239,12 @@ public class TestEventDAO {
 		boolean status = false;
 		
 		
-		visitor.setVisitorId(1001);
+		visitor.setVisitorId(1002);
 	
 		
 		
 		try {
-			status= eventDao.checkEventsofVisitor(visitor, 1001);
+			status= eventDao.checkEventsofVisitor(visitor, 1002);
 			
 			assertEquals(true, status);
 			
