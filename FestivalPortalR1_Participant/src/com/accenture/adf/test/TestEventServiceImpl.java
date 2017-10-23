@@ -19,6 +19,10 @@ import com.accenture.adf.businesstier.service.EventServiceImpl;
  */
 public class TestEventServiceImpl {
 
+	
+	private static Connection connection = null;
+	private static PreparedStatement statement = null;
+	private static ResultSet resultSet = null;
 	private List<Event> eventList;	
 	private Visitor visitor;
 	private EventServiceImpl eventServiceImpl;
@@ -81,7 +85,42 @@ public class TestEventServiceImpl {
 	public void testUpdateEventDeletions() {
 		/**
 		 * @TODO: Call updateEventDeletions and assert the return type of this method
+		 */
+		/**
+		 * @TODO: Call updateEventDeletions and assert the return type of this method
 		 */		
+		//assertEquals(eventServiceImpl.updateEventDeletions(1001).getReturnType(),void);
+		try {
+			connection = FERSDataConnection.createConnection();
+			statement = connection.prepareStatement("SELECT SEATSAVAILABLE FROM EVENT WHERE EVENTID = ?");
+			statement.setInt(1, 1001);
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			int val1 = resultSet.getInt(1);
+			
+			
+			
+			
+			
+			eventServiceImpl.updateEventDeletions(1001);
+			resultSet = statement.executeQuery();
+			resultSet.next();
+			int val2 = resultSet.getInt(1);
+			//System.out.println(val1+""+val2);
+			assertEquals(true,((++val1)==val2));
+			
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();	
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+
 	}
 
 }
