@@ -28,13 +28,15 @@ public class FERSDbQuery {
 
 	public String getSearchEvent() {
 
-		System.out.println("check");
-		System.out.println("check");
-		System.out.println("check");
+		
 		return searchEvent;
 	}
 
 	public void setSearchEvent(String searchEvent) {
+		
+		
+		
+		
 		this.searchEvent = searchEvent;
 	}
 
