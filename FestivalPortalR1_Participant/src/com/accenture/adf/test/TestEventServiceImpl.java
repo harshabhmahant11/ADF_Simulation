@@ -1,8 +1,11 @@
 package com.accenture.adf.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.After;
@@ -12,6 +15,7 @@ import org.junit.Test;
 import com.accenture.adf.businesstier.entity.Event;
 import com.accenture.adf.businesstier.entity.Visitor;
 import com.accenture.adf.businesstier.service.EventServiceImpl;
+import com.accenture.adf.helper.FERSDataConnection;
 
 /**
  * Junit test case to test class EventServiceImpl
@@ -123,4 +127,4 @@ public class TestEventServiceImpl {
 
 	}
 
-}
+

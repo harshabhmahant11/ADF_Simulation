@@ -9,17 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.AssertTrue;
-
-import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.accenture.adf.businesstier.dao.EventDAO;
 import com.accenture.adf.businesstier.entity.Event;
 import com.accenture.adf.businesstier.entity.Visitor;
 import com.accenture.adf.businesstier.service.VisitorServiceImpl;
+import com.accenture.adf.exceptions.FERSGenericException;
 import com.accenture.adf.helper.FERSDataConnection;
 
 /**
@@ -111,12 +109,13 @@ public class TestVisitorServiceImpl {
 
 	/**
 	 * Test case for method RegisterVisitor
+	 * @throws FERSGenericException 
 	 */
 	
 	
 	/*Doubt*/
 	@Test
-	public void testRegisterVisitor() {
+	public void testRegisterVisitor() throws FERSGenericException {
 		/**
 		 * @TODO: Call RegisterVisitor method by passing visitor object which 
 		 * can be retrieved using searchVisitor method and then asserting the returned
