@@ -119,7 +119,7 @@ public class TestEventDAO {
 				int val1 = resultSet.getInt(1);
 				
 				
-				resultSet=null;
+				//resultSet=null;
 				
 				
 				dao.updateEventDeletions(1001);
@@ -198,6 +198,18 @@ public class TestEventDAO {
 		 * @TODO: Call updateEventNominations for incorrect eventid and it should
 		 * throw an exception
 		 */	
+		int flag=0;
+		try {
+			dao.updateEventNominations(1009);
+		} catch (FERSGenericException e) {
+			// TODO Auto-generated catch block
+			
+			flag=1;	
+		}
+		finally
+		{
+			assertEquals(1, flag);
+		}
 	}
 
 	/**

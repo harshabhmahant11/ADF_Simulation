@@ -129,9 +129,10 @@ return eventList;
 			
 			int status = statement.executeUpdate();
 			if (status <= 0)
+			{
 				throw new FERSGenericException("Records not updated properly",
 						new Exception());
-			
+			}
 			
 			
 		} catch (ClassNotFoundException e) {
