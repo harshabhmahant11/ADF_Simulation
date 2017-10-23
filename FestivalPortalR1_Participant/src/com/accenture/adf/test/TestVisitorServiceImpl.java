@@ -2,6 +2,10 @@ package com.accenture.adf.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +20,17 @@ import org.junit.Test;
 import com.accenture.adf.businesstier.entity.Event;
 import com.accenture.adf.businesstier.entity.Visitor;
 import com.accenture.adf.businesstier.service.VisitorServiceImpl;
+import com.accenture.adf.helper.FERSDataConnection;
 
 /**
  * Junit test class for VisitorServiceImpl
  *
  */
 public class TestVisitorServiceImpl {
+	private static Connection connection = null;
+	private static PreparedStatement statement = null;
+	private static ResultSet resultSet = null;
+	
 
 	private List<Event> visitorList;	
 	private Visitor visitor;
@@ -46,6 +55,9 @@ public class TestVisitorServiceImpl {
 		/**
 		 * @TODO: Release all the objects here by assigning them null  
 		 */
+		visitorServiceImpl = null;
+		visitor = null;
+	
 	}
 
 	/**
@@ -161,14 +173,33 @@ public class TestVisitorServiceImpl {
 	 * Test case for method unregisterEvent
 	 */
 	@Test
-	public void testUnregisterEvent() {
+	public void testUnregisterEvent() throws ClassNotFoundException, SQLException {
 		/**
 		 * @TODO: Call unregisterEvent method by passing the visitor object which can be
 		 * retrieved using searchVisitor method and then asserting the returned type 
 		 * of unregisterEvent
 		 */		
 		
+		int status=0;
+		visitor = visitorServiceImpl.searchVisitor("npatel", "password");
+		try {
+			visitorServiceImpl.unregisterEvent(visitor,1002);
+			String qry = "SELECT COUNT(*) AS EVENTCOUNT FROM EVENTSIGNUP WHERE EVENTID=1002 AND VISITORID=1001 ;";
+			connection = FERSDataConnection.createConnection();
+			statement = connection.prepareStatement(qry);
 		
+			resultSet= statement.executeQuery();
+			resultSet.next();
+			status=resultSet.getInt(1);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals(0,status);
+	
+
 	}
 
 }
