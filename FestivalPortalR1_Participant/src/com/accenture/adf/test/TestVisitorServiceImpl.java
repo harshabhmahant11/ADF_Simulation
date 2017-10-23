@@ -122,11 +122,61 @@ public class TestVisitorServiceImpl {
 		 * can be retrieved using searchVisitor method and then asserting the returned
 		 * type of RegisterVisitor method 
 		 */		
-		visitor = visitorServiceImpl.searchVisitor("bsmith", "password");
+		visitor = visitorServiceImpl.searchVisitor("npatel", "password");
 
+		EventDAO edao = new EventDAO();
+		visitorServiceImpl.RegisterVisitor(visitor, 1002);
 		
 		
-	//	assertEquals(null, visitorServiceImpl.RegisterVisitor(visitor, 1003));
+		
+		try {
+			connection = FERSDataConnection.createConnection();
+			
+			String qry = "SELECT COUNT(*) AS EVENTCOUNT FROM EVENTSIGNUP WHERE EVENTID=? AND VISITORID=?";
+			
+			
+			statement = connection.prepareStatement(qry);
+			statement.setInt(1, 1002);
+			statement.setInt(2, visitor.getVisitorId());
+			
+			resultSet = statement.executeQuery();
+			
+			 resultSet.next();
+			
+			 int count = resultSet.getInt(1);
+			 
+			 
+			 assertEquals(1, count);
+			 
+			 
+			 int retVal;
+				int retVal2;
+				connection = FERSDataConnection.createConnection();
+				statement = connection.prepareStatement("SELECT SEATSAVAILABLE FROM EVENT WHERE EVENTID = 1001");
+				resultSet =	statement.executeQuery();
+				resultSet.next();
+				retVal = resultSet.getInt("SEATSAVAILABLE");
+				retVal--;
+				
+				edao.updateEventNominations(1001); 
+				
+				
+				resultSet =	statement.executeQuery();
+				resultSet.next();
+				retVal2 = resultSet.getInt("SEATSAVAILABLE");
+				
+				assertEquals(retVal,retVal2 );
+			 
+			 
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+
+		}
 		
 		
 	}
