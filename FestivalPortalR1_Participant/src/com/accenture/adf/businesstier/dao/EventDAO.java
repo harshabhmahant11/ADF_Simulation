@@ -216,11 +216,10 @@ return eventList;
 		int status = statement.executeUpdate();
 		
 		if (status <= 0)
-			throw new FERSGenericException("Records not updated properly",
-					new Exception());
+			throw new FERSGenericException("Records not updated properly",new Exception());
 		log.info("Event registration status was updated in Database and Seat released");
 		
-		FERSDataConnection.closeConnection();
+		//FERSDataConnection.closeConnection();
 
 	}
 }

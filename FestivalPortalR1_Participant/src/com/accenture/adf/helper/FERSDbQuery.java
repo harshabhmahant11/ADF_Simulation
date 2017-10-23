@@ -34,8 +34,6 @@ public class FERSDbQuery {
 
 	public void setSearchEvent(String searchEvent) {
 		
-		System.out.println("setSearchEvent");
-		
 		this.searchEvent = searchEvent;
 	}
 

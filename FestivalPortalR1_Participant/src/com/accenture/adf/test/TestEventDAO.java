@@ -54,6 +54,7 @@ public class TestEventDAO {
 		/**
 		 * @TODO: Close connection object here  
 		 */
+		//connection.close();
 	}
 
 	/**
@@ -75,6 +76,9 @@ public class TestEventDAO {
 		/**
 		 * @TODO: Release all the objects here by assigning them null  
 		 */
+		//showAllEvents=null;
+		//dao=null;
+		//connection=null;
 	}
 
 	/**
@@ -105,6 +109,37 @@ public class TestEventDAO {
 		 * Again find out the seats available for this event
 		 * testSeatsAvailableBefore should be 1 more then testSeatsAvailableAfter
 		 */		
+		
+		try {
+				connection = FERSDataConnection.createConnection();
+				statement = connection.prepareStatement("SELECT SEATSAVAILABLE FROM EVENT WHERE EVENTID = ?");
+				statement.setInt(1, 1001);
+				resultSet = statement.executeQuery();
+				resultSet.next();
+				int val1 = resultSet.getInt(1);
+				
+				
+				resultSet=null;
+				
+				
+				dao.updateEventDeletions(1001);
+				resultSet = statement.executeQuery();
+				resultSet.next();
+				int val2 = resultSet.getInt(1);
+				System.out.println(val1+""+val2);
+				assertEquals(true,((++val1)==val2));
+				
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
