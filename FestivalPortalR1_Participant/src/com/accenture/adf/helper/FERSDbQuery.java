@@ -27,7 +27,10 @@ public class FERSDbQuery {
 	private String validateVisitor = "";
 
 	public String getSearchEvent() {
-	
+
+		System.out.println("check");
+		System.out.println("check");
+		System.out.println("check");
 		return searchEvent;
 	}
 
