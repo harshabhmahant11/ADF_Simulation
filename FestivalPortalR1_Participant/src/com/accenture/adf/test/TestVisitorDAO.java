@@ -51,9 +51,9 @@ public class TestVisitorDAO {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		/**
-		 * @TODO: Release all the objects here by assigning them null  
-		 */
+		visitor=null;
+		visitorDAO=null;
+		registeredEvents=null;
 	}
 
 	/**
@@ -65,18 +65,18 @@ public class TestVisitorDAO {
 		 * @TODO: Create visitor object by setting appropriate values
 		 * Call insertData method by passing this visitor object
 		 * Search this new visitor object by calling searchUser method
-		 * Assert the values of username
-		 */		
+		 * Assert the values of username*/		
 		
-		visitor.setUserName("Tttit");
+		visitor.setUserName("jon");
 		visitor.setFirstName("asA");
 		visitor.setFirstName("asda");
 		visitor.setPassword("xxxx");
-		
+		Visitor v1=new Visitor();
 		boolean flag= false;
 		
 		try {
 			flag=visitorDAO.insertData(visitor);
+			v1=visitorDAO.searchUser("jon", "xxxx");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,6 +89,8 @@ public class TestVisitorDAO {
 			e.printStackTrace();
 		}
 		assertEquals(true,flag);
+		assertEquals(visitor.getUserName(),v1.getUserName());
+	
 	}	
 
 
@@ -175,6 +177,9 @@ public class TestVisitorDAO {
 		
 		
 		
+		
+		
+		
 	}	
 
 	/**
@@ -192,6 +197,9 @@ public class TestVisitorDAO {
 			visitor = visitorDAO.searchUser("bsmith", "password");
 			
 			registeredEvents = visitorDAO.registeredEvents(visitor);
+			
+			
+			
 			
 			assertEquals(3, registeredEvents.size());
 			
@@ -254,6 +262,34 @@ public class TestVisitorDAO {
 		 * Pass this visitor object and valid eventid to unregisterEvent method
 		 * and assert the value
 		 */		
+		//System.out.println("tests");
+		
+	int status=0;
+		try {
+			visitor = visitorDAO.searchUser("npatel", "password");
+			try {
+				visitorDAO.unregisterEvent(visitor,1002);
+				String qry = "SELECT COUNT(*) AS EVENTCOUNT FROM EVENTSIGNUP WHERE EVENTID=1002 AND VISITORID=1001 ;";
+				connection = FERSDataConnection.createConnection();
+				statement = connection.prepareStatement(qry);
+			
+				resultSet= statement.executeQuery();
+				resultSet.next();
+				status=resultSet.getInt(1);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals(0,status);
 	}
 
 }
