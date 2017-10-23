@@ -264,7 +264,7 @@ public class TestVisitorDAO {
 		 */		
 		//System.out.println("tests");
 		
-	int status=0;
+	int status=1;
 		try {
 			visitor = visitorDAO.searchUser("npatel", "password");
 			try {
