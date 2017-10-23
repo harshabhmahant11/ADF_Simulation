@@ -119,8 +119,23 @@ public class EventServiceImpl implements EventFacade {
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document
-		//eventdao = new EventDAO();
-		//eventdao.
+		eventdao = new EventDAO();
+		try {
+			eventdao.updateEventDeletions(eventid);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e.getMessage());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		
 		
 	}
 
