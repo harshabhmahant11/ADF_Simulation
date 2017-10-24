@@ -195,12 +195,12 @@ public class VisitorDAO {
 	 *  @throws Exception
 	 *  
 	 */
- /* DONE BUT NEED TO CHECK WITH SIR about checking visitor status*/
+ /*clean*/
 	public void registerVisitorToEvent(Visitor visitor, int eventid)
 			throws ClassNotFoundException, SQLException, Exception {
 
 		
-		
+	
 		
 		int status;
 		Boolean alreadyRegistered = false;
@@ -231,6 +231,11 @@ public class VisitorDAO {
 		statement.setInt(2, visitor.getVisitorId());
 		
 		statement.executeUpdate();
+	}
+		else 
+		{
+			throw new FERSGenericException("Already Registered",
+					new Exception()); 
 		}
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
@@ -349,7 +354,7 @@ public class VisitorDAO {
 	 */
 	
 		public void unregisterEvent(Visitor visitor, int eventid)
-				throws ClassNotFoundException, SQLException, Exception {
+				throws ClassNotFoundException, SQLException, Exception {/*
 			connection = FERSDataConnection.createConnection();
 			statement = connection.prepareStatement(query.getDeleteEventQuery());
 			statement.setInt(1, eventid);
@@ -360,7 +365,7 @@ public class VisitorDAO {
 						new Exception());
 			log.info("unregistering event in Database for the visitor :"
 					+ visitor.getFirstName());
-			FERSDataConnection.closeConnection();
+			FERSDataConnection.closeConnection();*/
 		}		
 			
 

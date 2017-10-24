@@ -246,7 +246,7 @@ public class TestEventDAO {
 		try {
 			status= eventDao.checkEventsofVisitor(visitor, 1002);
 			
-			assertEquals(true, status);
+			assertEquals(false, status);
 			
 			
 		} catch (ClassNotFoundException e) {

@@ -1,5 +1,8 @@
 package com.accenture.adf.businesstier.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -9,6 +12,8 @@ import com.accenture.adf.businesstier.dao.EventDAO;
 import com.accenture.adf.businesstier.dao.VisitorDAO;
 import com.accenture.adf.businesstier.entity.Event;
 import com.accenture.adf.businesstier.entity.Visitor;
+import com.accenture.adf.helper.FERSDataConnection;
+import com.accenture.adf.helper.FERSDbQuery;
 
 /**
  * <br/>
@@ -23,6 +28,10 @@ public class VisitorServiceImpl implements VisitorFacade {
 
 	VisitorDAO vdao = new VisitorDAO(); ///new line added
 	EventDAO edao = new EventDAO();
+	private Connection connection = null;
+	private PreparedStatement statement = null;
+	private ResultSet resultSet = null;
+	private FERSDbQuery query;
 	
 	//LOGGER for logging all exceptions of VISITOR DAO
 	private static Logger log = Logger.getLogger(VisitorServiceImpl.class);
@@ -95,7 +104,7 @@ public class VisitorServiceImpl implements VisitorFacade {
 	 *	  
 	 */
 	
-	public Visitor searchVisitor(String username, String password) {
+	public Visitor searchVisitor (String username, String password) {
 
 		
 		Visitor visitor = new Visitor();
@@ -136,29 +145,30 @@ public class VisitorServiceImpl implements VisitorFacade {
 	 *	@throws Exception
 	 *	  
 	 */
-	
+	/*CLean*/
 	public void RegisterVisitor(Visitor visitor, int eventid) {
 
 		// TODO:  Add code here.....
 		// TODO:  Pseudo-code are in the block comments above this method
 		// TODO:  For more comprehensive pseudo-code with details, refer to the Component/Class Detailed Design Document
 					
-		try {
-			vdao.registerVisitorToEvent(visitor, eventid);
-			edao.updateEventNominations(eventid);
-						
-		} catch (ClassNotFoundException e) {
-			log.equals(e.getMessage());
-
-		} catch (SQLException e) {
-			log.equals(e.getMessage());
-
-		} catch (Exception e) {
-			log.equals(e.getMessage());
-
-		}
 		
 		
+			try {
+				vdao.registerVisitorToEvent(visitor, eventid);
+				edao.updateEventNominations(eventid);
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			}
+					
 	}
 
 	/**
@@ -229,6 +239,8 @@ public class VisitorServiceImpl implements VisitorFacade {
 		VisitorDAO visitorDAO = new VisitorDAO();
 		try {
 			visitorDAO.unregisterEvent(visitor, eventid);
+			
+			edao.updateEventDeletions(eventid);
 		} catch (ClassNotFoundException exception) {
 			log.info("Exception is :" + exception.getMessage());
 		} catch (SQLException exception) {
