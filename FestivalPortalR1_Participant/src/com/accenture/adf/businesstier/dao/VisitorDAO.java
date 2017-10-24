@@ -231,7 +231,7 @@ public class VisitorDAO {
 		statement.setInt(2, visitor.getVisitorId());
 		
 		statement.executeUpdate();
-	}
+	    }
 		else 
 		{
 			throw new FERSGenericException("Already Registered",
