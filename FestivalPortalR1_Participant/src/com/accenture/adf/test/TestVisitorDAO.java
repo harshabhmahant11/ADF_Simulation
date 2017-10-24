@@ -194,14 +194,14 @@ public class TestVisitorDAO {
 		 */		
 		
 		try {
-			visitor = visitorDAO.searchUser("bsmith", "password");
+			visitor = visitorDAO.searchUser("jjones", "password");
 			
 			registeredEvents = visitorDAO.registeredEvents(visitor);
 			
 			
 			
 			
-			assertEquals(3, registeredEvents.size());
+			assertEquals(1, registeredEvents.size());
 			
 			
 			

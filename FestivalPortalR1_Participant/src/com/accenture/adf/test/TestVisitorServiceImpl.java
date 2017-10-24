@@ -135,7 +135,7 @@ public class TestVisitorServiceImpl {
 			
 			
 			statement = connection.prepareStatement(qry);
-			statement.setInt(1, 1002);
+			statement.setInt(1, 1001);
 			statement.setInt(2, visitor.getVisitorId());
 			
 			resultSet = statement.executeQuery();
@@ -180,7 +180,7 @@ public class TestVisitorServiceImpl {
 		
 	}
 
-	/**
+	/**z
 	 * Test case for method showRegisteredEvents
 	 */
 	@Test
@@ -197,7 +197,7 @@ public class TestVisitorServiceImpl {
 		
 		registeredEventList = visitorServiceImpl.showRegisteredEvents(visitor);
 		
-		assertEquals(3, registeredEventList.size());
+		assertEquals(1, registeredEventList.size());
 	}
 
 	/**
