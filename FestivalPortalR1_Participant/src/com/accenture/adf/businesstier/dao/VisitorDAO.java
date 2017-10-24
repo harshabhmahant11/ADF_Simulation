@@ -352,20 +352,21 @@ public class VisitorDAO {
 	 *  @throws Exception
 	 *  
 	 */
-	
+	/*clean*/
+
 		public void unregisterEvent(Visitor visitor, int eventid)
-				throws ClassNotFoundException, SQLException, Exception {/*
+				throws ClassNotFoundException, SQLException, Exception {
 			connection = FERSDataConnection.createConnection();
 			statement = connection.prepareStatement(query.getDeleteEventQuery());
 			statement.setInt(1, eventid);
 			statement.setInt(2, visitor.getVisitorId());
 			int status = statement.executeUpdate();
 			if (status <= 0)
-				throw new FERSGenericException("Records not updated properly",
+				throw new FERSGenericException("Records not Present",
 						new Exception());
 			log.info("unregistering event in Database for the visitor :"
 					+ visitor.getFirstName());
-			FERSDataConnection.closeConnection();*/
+			FERSDataConnection.closeConnection();
 		}		
 			
 

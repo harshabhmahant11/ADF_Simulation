@@ -239,13 +239,18 @@ public class VisitorServiceImpl implements VisitorFacade {
 		VisitorDAO visitorDAO = new VisitorDAO();
 		try {
 			visitorDAO.unregisterEvent(visitor, eventid);
-			
 			edao.updateEventDeletions(eventid);
 		} catch (ClassNotFoundException exception) {
+			System.out.println(exception.getMessage());
+
 			log.info("Exception is :" + exception.getMessage());
 		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+
 			log.info("Exception is :" + exception.getMessage());
 		} catch (Exception exception) {
+			System.out.println(exception.getMessage());
+
 			log.info("Exception is :" + exception.getMessage());
 		}
 	}

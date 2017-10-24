@@ -165,14 +165,14 @@ public class TestVisitorDAO {
 			 
 			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+
 		}
 		
 		
@@ -255,6 +255,7 @@ public class TestVisitorDAO {
 	/**
 	 * Test case for method registeredEvents
 	 */
+	/*clean*/
 	@Test
 	public void testUnregisterEvent() {
 		/**
@@ -263,12 +264,12 @@ public class TestVisitorDAO {
 		 * and assert the value
 		 */		
 		//System.out.println("tests");
-/*		
+		
 	int status=1;
 		try {
-			visitor = visitorDAO.searchUser("npatel", "password");
-			try {
-				visitorDAO.unregisterEvent(visitor,1002);
+			visitor = visitorDAO.searchUser("bsmith", "password");
+			
+				visitorDAO.unregisterEvent(visitor,1001);
 				String qry = "SELECT COUNT(*) AS EVENTCOUNT FROM EVENTSIGNUP WHERE EVENTID=1002 AND VISITORID=1001 ;";
 				connection = FERSDataConnection.createConnection();
 				statement = connection.prepareStatement(qry);
@@ -277,19 +278,21 @@ public class TestVisitorDAO {
 				resultSet.next();
 				status=resultSet.getInt(1);
 				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
 		}
 		
-		assertEquals(0,status);*/
+		assertEquals(0,status);
 	}
 
 }

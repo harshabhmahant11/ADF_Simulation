@@ -221,7 +221,7 @@ public class TestVisitorServiceImpl {
 	/**
 	 * Test case for method unregisterEvent
 	 */
-	/*@Test
+	@Test
 	public void testUnregisterEvent() throws ClassNotFoundException, SQLException {
 		/**
 		 * @TODO: Call unregisterEvent method by passing the visitor object which can be
@@ -229,8 +229,8 @@ public class TestVisitorServiceImpl {
 		 * of unregisterEvent
 		 */		
 		
-/*		int status=0;
-		visitor = visitorServiceImpl.searchVisitor("npatel", "password");
+	int status=0;
+		visitor = visitorServiceImpl.searchVisitor("jjones", "password");
 		try {
 			visitorServiceImpl.unregisterEvent(visitor,1002);
 			String qry = "SELECT COUNT(*) AS EVENTCOUNT FROM EVENTSIGNUP WHERE EVENTID=1002 AND VISITORID=1001 ;";
@@ -249,6 +249,6 @@ public class TestVisitorServiceImpl {
 		assertEquals(0,status);
 	
 
-	}*/
+	}
 
 }
