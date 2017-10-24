@@ -265,12 +265,13 @@ public class VisitorDAO {
 	 */
 	
 	/* DONE */
+	
 	public ArrayList<Event> registeredEvents(Visitor visitor)
 			throws ClassNotFoundException, SQLException {
 		
-		ArrayList<Event>  registeredEventList = new ArrayList<Event>();
-		Event e = new Event();
 		
+		
+		ArrayList<Event>  registeredEventList = new ArrayList<Event>();
 		
 		connection = FERSDataConnection.createConnection();
 		String statusQuery = query.getStatusQuery();
@@ -281,6 +282,7 @@ public class VisitorDAO {
 	//	SELECT E1.EVENTID, E1.NAME, E1.DESCRIPTION, E1.PLACES, E1.DURATION, E1.EVENTTYPE , E2.SIGNUPID FROM EVENT E1, EVENTSIGNUP E2 WHERE E1.EVENTID = E2.EVENTID AND E2.VISITORID = 1001;
 		while(resultSet.next())
 		{
+			Event e = new Event();
 			e.setDescription(resultSet.getString("description"));
 			e.setName(resultSet.getString("name"));
 			e.setEventid(resultSet.getInt("eventid"));
