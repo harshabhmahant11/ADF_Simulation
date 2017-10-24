@@ -322,6 +322,7 @@ public class VisitorDAO {
 	 */
 	public int updateVisitor(Visitor visitor) throws ClassNotFoundException,
 	SQLException {
+		System.out.println("0");
 		connection = FERSDataConnection.createConnection();
 		statement = connection.prepareStatement(query.getUpdateQuery());
 		statement.setString(1, visitor.getFirstName());
@@ -334,6 +335,7 @@ public class VisitorDAO {
 		statement.setInt(8, visitor.getVisitorId());
 
 		int status = statement.executeUpdate();
+		System.out.println(status);
 		log.info("Updating visitor details in Database for Visitor ID :"
 		+ visitor.getVisitorId());
 		FERSDataConnection.closeConnection();

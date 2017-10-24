@@ -218,15 +218,16 @@ public class VisitorServiceImpl implements VisitorFacade {
 	 * SERVICE CLASS for updating visitor details
 	 */
 	public int updateVisitorDetails(Visitor visitor) {
-
 		VisitorDAO visitorDAO = new VisitorDAO();
 		int status = 0;
 		try {
 			status = visitorDAO.updateVisitor(visitor);
 		} catch (ClassNotFoundException exception) {
 			log.info("Exception is :" + exception.getMessage());
+			System.out.println(exception.getMessage());
 		} catch (SQLException exception) {
 			log.info("Exception is :" + exception.getMessage());
+			System.out.println(exception.getMessage());
 		}
 		return status;
 	}

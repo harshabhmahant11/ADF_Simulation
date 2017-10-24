@@ -32,7 +32,6 @@ import com.accenture.adf.exceptions.FERSGenericException;
 
 @Controller
 public class VisitorController {
-
 	private static Logger log = Logger.getLogger(VisitorController.class);
 	
 	/**
@@ -207,6 +206,12 @@ public class VisitorController {
 		
 		HttpSession session=request.getSession();
 		Visitor visitor=(Visitor)session.getAttribute("VISITOR");
+		
+		//****************************************************************
+		
+	
+		
+		
 		int eventid=Integer.parseInt(request.getParameter("eventId"));
 		
 		log.info("Visitor registered for the event :"+eventid);
@@ -278,7 +283,8 @@ public class VisitorController {
 		log.info("Updating visitor details with VisitorID :"+visitor.getVisitorId());
 		
 		String username=request.getParameter("username");
-		String password=request.getParameter("password");
+		//String password=request.getParameter("password");
+		String password = visitor.getPassword();
 		String firstname=request.getParameter("firstname");
 		String lastname=request.getParameter("lastname");
 		String email=request.getParameter("email");
