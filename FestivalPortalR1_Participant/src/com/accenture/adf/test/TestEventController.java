@@ -44,11 +44,6 @@ public class TestEventController {
 		/**
 		 * @TODO: Release all the objects here by assigning them null  
 		 */
-		modelAndView = null;
-		controller = null;
-		response = null;
-		request = null;
-		
 	}
 
 	/**
@@ -60,14 +55,7 @@ public class TestEventController {
 		/**
 		 * @TODO: Call getAvailableEvents methods and assert
 		 * it for appropriate model view name
-		 */	
-		try {
-			modelAndView = controller.getAvailableEvents(request, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			fail("Exception");
-		}
-		assertEquals("/eventCatalog.jsp", modelAndView.getViewName());
+		 */		
 	}
 
 	/**
@@ -79,14 +67,7 @@ public class TestEventController {
 		/**
 		 * @TODO: Call getAvailableEvents methods  by passing request as null
 		 * and assert it for appropriate model view name
-		 */	
-
-		try {
-			modelAndView = controller.getAvailableEvents(null, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			fail("Exception");
-		}
-		assertEquals(null, modelAndView.getViewName());
+		 */		
 	}
+
 }
