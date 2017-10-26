@@ -430,7 +430,7 @@ public class VisitorDAO {
 			            }
 
 			      }finally{
-			    	  //ADD CLEAN UP 
+			    	 statement.close();
 			      }
 			      //TODO: Add a finally block to clean up prepared statement
 			      //TODO: Return false after finally block

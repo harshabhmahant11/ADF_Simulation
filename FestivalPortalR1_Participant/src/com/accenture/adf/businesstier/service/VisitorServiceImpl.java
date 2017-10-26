@@ -261,16 +261,18 @@ public class VisitorServiceImpl implements VisitorFacade {
 
 		//TODO: Create a new instance of VisitorDAO object
 		VisitorDAO visitorDAO = new VisitorDAO();
-		int status;
+		int status=0;
 		 
 		try{
-			return status = visitorDAO.changePassword(visitor);
+			status = visitorDAO.changePassword(visitor);
 		}catch(ClassNotFoundException e){
+			System.out.println(e.getMessage());
 			log.error(e);
 		}catch(SQLException sq){
+			System.out.println(sq.getMessage());
 			log.error(sq);
 		}
-		return 0;
+		return status;
 
 		//TODO: Within a return statement invoke changePassword() method on VisitorDAO with the new instance of the Visitor object created in previous TODO as password
 		//TODO: Surround step 3 in a try..catch block for ClassNotFoundException and SQLException

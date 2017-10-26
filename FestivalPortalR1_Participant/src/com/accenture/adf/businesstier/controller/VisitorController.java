@@ -368,89 +368,106 @@ public class VisitorController {
 	}
 
 	@RequestMapping("/changePWD.htm")
-
 	public ModelAndView changePassword(HttpServletRequest request, HttpServletResponse response) {
 
-	// TODO: Declare a variable with name as status of type int and initialize status with ‘-1’
-		int status =-1;
-	 
-	// TODO: Declare a session variable of type HttpSession and assign it the session from the request parameter
+		
+		// TODO: Declare a variable with name as status of type int and
+		// initialize status with ‘-1’
+		int status = -1;
+
+		// TODO: Declare a session variable of type HttpSession and assign it
+		// the session from the request parameter
 		HttpSession sessionVar = request.getSession();
-	// TODO: Declare a visitor variable of type Visitor and retrieve the Visitor object from the session parameter, VISITOR
-		Visitor visitor=(Visitor)sessionVar.getAttribute("VISITOR");
-	      if(visitor!= null){
-	    	  String password = (String)sessionVar.getAttribute("PASSWORD");
-	 
-	// TODO: Declare a password variable of type String and retrieve the new password from the request parameter, password
-	            if(password!= null){
-	            	visitor.setPassword(password);
-	                //TODO: Set password to visitor object using set method
-VisitorServiceImpl visitorServiceImplObj = new VisitorServiceImpl();
-	//TODO: Create an instance of VisitorServiceImpl object
-	                  try{
-status = visitorServiceImplObj.changePassword(visitor);
-//TODO: Invoke changePassword() method on VisitorServiceImpl with visitor as argument and capture the return value into status field
+		// TODO: Declare a visitor variable of type Visitor and retrieve the
+		// Visitor object from the session parameter, VISITOR
+		Visitor visitor = (Visitor) sessionVar.getAttribute("VISITOR");
+		if (visitor != null) {
+			String password = (String) request.getParameter("password");
 
-	                  }catch (FERSGenericException e){
-	                      log.error(e);
-	                      status = -5;
-	                	  //TODO: set status value to -5 for any system error
-//TODO: print the error message to log file using the error method of the Log object
-	                  }
-	            } else {
-	                  log.error("Password can not be blank");
-	            }
+			//System.out.println("NEW "+password);
+			// TODO: Declare a password variable of type String and retrieve the
+			// new password from the request parameter, password
+			if (password != null) {
+				visitor.setPassword(password);
+				// TODO: Set password to visitor object using set method
+				VisitorServiceImpl visitorServiceImplObj = new VisitorServiceImpl();
+				// TODO: Create an instance of VisitorServiceImpl object
+				try {
+					status = visitorServiceImplObj.changePassword(visitor);
+					
+					// TODO: Invoke changePassword() method on
+					// VisitorServiceImpl with visitor as argument and capture
+					// the return value into status field
 
-	                  log.info("Visitor password changed :"+status);
+				} catch (FERSGenericException e) {
+					log.error(e);
+					status = -5;
+					// TODO: set status value to -5 for any system error
+					// TODO: print the error message to log file using the error
+					// method of the Log object
+				}
+			} else {
+				log.error("Password can not be blank");
+			}
 
-	      } else {
+			log.info("Visitor password changed :" + status);
 
-	            log.error("Visitor details are invalid");
+		} else {
 
-	      }
+			log.error("Visitor details are invalid");
 
-	      ModelAndView mv = new ModelAndView();
+		}
 
-	      // TODO: Create an instance of the ModelAndView object
+		ModelAndView mv = new ModelAndView();
 
-	      if (status > 0){
+		// TODO: Create an instance of the ModelAndView object
 
-	            mv.addObject("status","success");
+		
+		if (status > 0) {
 
-	            mv.setViewName("/changePWD.jsp");
+			mv.addObject("status", "success");
 
-	      } else if(status == -5) {
+			mv.setViewName("/changePWD.jsp");
 
-	    	  mv.addObject("status","error");
-	// TODO: Add error to status variable/object in the ModelAndView object
-	    	  mv.addObject("errorMsg","System error occurred, Please verify log file for more details");
-	
-	// TODO: add an ‘errorMsg’ object with value as "System error occurred, Please verify log file for more details"
+		} else if (status == -5) {
 
-	      } else if(status == -10) {
+			mv.addObject("status", "error");
+			// TODO: Add error to status variable/object in the ModelAndView
+			// object
+			mv.addObject("errorMsg", "System error occurred, Please verify log file for more details");
 
-	// TODO: Add error to status variable/object in the ModelAndView object
-	    	  mv.addObject("status","error");
-	    	  mv.addObject("errorMsg","New password must be different from current password, please choose a different password and retry");
-	 
+			// TODO: add an ‘errorMsg’ object with value as "System error
+			// occurred, Please verify log file for more details"
 
-	// TODO: add an ‘errorMsg’ object with value as "New password must be different from current password, please choose a different password and retry"
+		} else if (status == -10) {
 
-	      } else {
+			// TODO: Add error to status variable/object in the ModelAndView
+			// object
+			mv.addObject("status", "error");
+			mv.addObject("errorMsg",
+					"New password must be different from current password, please choose a different password and retry");
 
-	// TODO: Add error to status variable/object in the ModelAndView object
-	    	  mv.addObject("status","error");
-	    	  mv.addObject("errorMsg","Error occurred while changing password.. please verify visitor and password details and retry again");
-	 
+			// TODO: add an ‘errorMsg’ object with value as "New password must
+			// be different from current password, please choose a different
+			// password and retry"
 
-	// TODO: add an ‘errorMsg’ object with the value as "Error occurred while changing password.. please verify visitor and password details and retry again"
+		} else {
 
-	      }
+			// TODO: Add error to status variable/object in the ModelAndView
+			// object
+			mv.addObject("status", "error");
+			mv.addObject("errorMsg",
+					"Error occurred while changing password.. please verify visitor and password details and retry again");
 
-	      
+			// TODO: add an ‘errorMsg’ object with the value as "Error occurred
+			// while changing password.. please verify visitor and password
+			// details and retry again"
 
-	      return mv;
-	      // TODO: return ModelAndView object
+		}
+
+		//System.out.println(mv.getViewName());
+		return mv;
+		// TODO: return ModelAndView object
 
 	}
 
