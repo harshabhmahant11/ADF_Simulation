@@ -372,10 +372,11 @@ public class VisitorDAO {
 						status = -10;
 					} else {
 						statement = connection.prepareStatement(query.getChangePWDQuery());
+						//System.out.println(visitor.getPassword());
 						statement.setString(1, visitor.getPassword());
 						statement.setInt(2, visitor.getVisitorId());
-						int queryStatus = statement.executeUpdate();
-						if (queryStatus > 0) {
+						status = statement.executeUpdate();
+						if (status > 0) {
 							log.info("Visitor password successfully modified");
 						}
 
