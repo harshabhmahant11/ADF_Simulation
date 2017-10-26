@@ -372,7 +372,7 @@ public class VisitorDAO {
 						status = -10;
 					} else {
 						statement = connection.prepareStatement(query.getChangePWDQuery());
-						statement.setString(1, newPassword);
+						statement.setString(1, visitor.getPassword());
 						statement.setInt(2, visitor.getVisitorId());
 						int queryStatus = statement.executeUpdate();
 						if (queryStatus > 0) {
@@ -405,6 +405,7 @@ public class VisitorDAO {
 		// objects
 
 		// TODO: Return status value
+		return status;
 	}
 
 	private boolean matchWithOldPwd(Visitor visitor) throws SQLException{

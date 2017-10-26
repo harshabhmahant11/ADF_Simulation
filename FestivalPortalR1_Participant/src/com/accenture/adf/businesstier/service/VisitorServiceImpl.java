@@ -12,6 +12,7 @@ import com.accenture.adf.businesstier.dao.EventDAO;
 import com.accenture.adf.businesstier.dao.VisitorDAO;
 import com.accenture.adf.businesstier.entity.Event;
 import com.accenture.adf.businesstier.entity.Visitor;
+import com.accenture.adf.exceptions.FERSGenericException;
 import com.accenture.adf.helper.FERSDataConnection;
 import com.accenture.adf.helper.FERSDbQuery;
 
@@ -255,5 +256,26 @@ public class VisitorServiceImpl implements VisitorFacade {
 			log.info("Exception is :" + exception.getMessage());
 		}
 	}
+	
+	public int changePassword(Visitor visitor) throws FERSGenericException {
+
+		//TODO: Create a new instance of VisitorDAO object
+		VisitorDAO visitorDAO = new VisitorDAO();
+		int status;
+		 
+		try{
+			return status = visitorDAO.changePassword(visitor);
+		}catch(ClassNotFoundException e){
+			log.error(e);
+		}catch(SQLException sq){
+			log.error(sq);
+		}
+		return 0;
+
+		//TODO: Within a return statement invoke changePassword() method on VisitorDAO with the new instance of the Visitor object created in previous TODO as password
+		//TODO: Surround step 3 in a try..catch block for ClassNotFoundException and SQLException
+		//TODO: In catch block log an error to log file with the error message from the exception object and rethrow the exception as FERSGenericException attaching original exception object
+
+		}
 
 }
